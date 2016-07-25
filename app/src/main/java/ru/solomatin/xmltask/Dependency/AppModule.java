@@ -6,6 +6,7 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import ru.solomatin.xmltask.RxApplication;
 
 /**
  * Модуль предоставления Application

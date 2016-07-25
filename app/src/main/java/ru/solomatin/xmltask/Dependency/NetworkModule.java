@@ -1,11 +1,14 @@
 package ru.solomatin.xmltask.Dependency;
 
+import android.app.Application;
 import android.support.v4.util.LruCache;
 
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import okhttp3.Cache;
+import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
@@ -24,21 +27,21 @@ public class NetworkModule {
         this.baseUrl = baseUrl;
     }
 
-//    @Provides
-//    @Singleton
-//    Cache provideOkHttpCache(Application application) {
-//        int cacheSize = 10 * 1024 * 1024; // 10 MiB
-//        return new Cache(application.getCacheDir(), cacheSize);
-//    }
+    @Provides
+    @Singleton
+    Cache provideOkHttpCache(Application application) {
+        int cacheSize = 10 * 1024 * 1024; // 10 MiB
+        return new Cache(application.getCacheDir(), cacheSize);
+    }
 
-//    @Provides
-//    @Singleton
-//    OkHttpClient provideOkHttpClient(Cache cache) {
-//        OkHttpClient client = new OkHttpClient.Builder()
-//                .cache(cache)
-//                .build();
-//        return client;
-//    }
+    @Provides
+    @Singleton
+    OkHttpClient provideOkHttpClient(Cache cache) {
+        OkHttpClient client = new OkHttpClient.Builder()
+                .cache(cache)
+                .build();
+        return client;
+    }
 
     @Provides
     @Singleton

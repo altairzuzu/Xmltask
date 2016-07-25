@@ -20,9 +20,8 @@ public class Product {
 
     public Product() {}
 
-
-    @Root
-    private class ProductName {
+    @Root(strict = false)
+    private static class ProductName {
 
         @Element(name = "BEZEICH")
         private String nameStr;
@@ -30,7 +29,7 @@ public class Product {
         @Element(name = "HIERARCHIE")
         private String hierarchie;
 
-        @Element(name = "VERKNUEPFG")
+        @Element(name = "VERKNUEPFG",required=false)
         private String parentId;
     }
 }

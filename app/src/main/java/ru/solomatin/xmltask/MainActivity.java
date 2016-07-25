@@ -21,11 +21,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         presenter = new Presenter(this);
 
-
         if(savedInstanceState!=null){
             rxCallInWorks = savedInstanceState.getBoolean(EXTRA_RX);
         }
 
+        presenter.loadRxData();
     }
 
     @Override
