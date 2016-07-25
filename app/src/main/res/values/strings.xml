@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Xmltask</string>
+    <string name="no_connection_message">Ошибка загрузки</string>
+    <string name="loading">Загрузка&#8230;</string>
+</resources>
