@@ -1,14 +1,11 @@
 package ru.solomatin.xmltask.Dependency;
 
-import android.app.Application;
 import android.support.v4.util.LruCache;
 
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import okhttp3.Cache;
-import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
@@ -29,27 +26,9 @@ public class NetworkModule {
 
     @Provides
     @Singleton
-    Cache provideOkHttpCache(Application application) {
-        int cacheSize = 10 * 1024 * 1024; // 10 MiB
-        return new Cache(application.getCacheDir(), cacheSize);
-    }
-
-    @Provides
-    @Singleton
-    OkHttpClient provideOkHttpClient(Cache cache) {
-        OkHttpClient client = new OkHttpClient.Builder()
-                .cache(cache)
-                .build();
-        return client;
-    }
-
-    @Provides
-    @Singleton
-    //Retrofit provideRetrofit(OkHttpClient okHttpClient) {
     Retrofit provideRetrofit() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(baseUrl)
-                //.client(okHttpClient)
                 .addConverterFactory(SimpleXmlConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
@@ -64,7 +43,7 @@ public class NetworkModule {
 
     @Provides
     @Singleton
-    LruCache<Class<?>, Observable<?>> provideLruCache() {
+    LruCache<String, Observable<?>> provideLruCache() {
         int lruCacheSize = 1024 * 1024;
         return new LruCache<>(lruCacheSize);
     }

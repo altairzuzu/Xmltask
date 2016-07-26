@@ -22,19 +22,18 @@ public class Presenter {
     private Subscription subscription;
     @Inject NetworkApi networkService;
     @Inject
-    LruCache<Class<?>, Observable<?>> cacheObservables;
+    LruCache<String, Observable<?>> cacheObservables;
 
     public Presenter(MainActivity view){
         this.view = view;
         ((RxApplication) view.getApplication()).getNetworkComponent().inject(this);
     }
 
-    public void loadRxData(){
+    public void loadRxData(String url, boolean useCache){
         view.showRxInProcess();
         // Подготавливаем Observable к подписке либо извлекаем из кэша
         Observable<ApiResponse> apiResponseObservable = (Observable<ApiResponse>)
-                getPreparedObservable(networkService.getPersonsObservable(),
-                        ApiResponse.class);
+                getPreparedObservable(networkService.getPersonsObservable(url), url, useCache);
         subscription = apiResponseObservable.subscribe(new Observer<ApiResponse>() {
             @Override
             public void onCompleted() {
@@ -47,7 +46,7 @@ public class Presenter {
 
             @Override
             public void onNext(ApiResponse response) {
-                // Передаем полученный json-ответ в MainActivity
+                // Передаем полученный xml-ответ в MainActivity
                 view.showRxResults(response);
             }
         });
@@ -65,12 +64,18 @@ public class Presenter {
      * Возвращает кэшированный Observable или подготавливает новый
      *
      * @param unPreparedObservable Неподготовленный Observable
-     * @param clazz Используется, как ключ в LruCache
+     * @param url Используется, как ключ в LruCache
      * @return Observable, подготовленная для подписки
      */
-    public Observable<?> getPreparedObservable(Observable<?> unPreparedObservable, Class<?> clazz) {
-        // Ищем уже готовый Observable в кэше
-        Observable<?> preparedObservable = cacheObservables.get(clazz);
+    public Observable<?> getPreparedObservable(Observable<?> unPreparedObservable,
+                                               String url,
+                                               boolean useCache) {
+        Observable<?> preparedObservable = null;
+        if (useCache) {
+            // Ищем уже готовый Observable в кэше
+            preparedObservable = cacheObservables.get(url);
+        }
+
         if (preparedObservable != null) {
             return preparedObservable;
         }
@@ -79,7 +84,7 @@ public class Presenter {
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .cache();
-        cacheObservables.put(clazz, preparedObservable);
+        cacheObservables.put(url, preparedObservable);
         return preparedObservable;
     }
 

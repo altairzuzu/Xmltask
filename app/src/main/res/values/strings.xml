@@ -1,5 +1,25 @@
 <resources>
-    <string name="app_name">Xmltask</string>
-    <string name="no_connection_message">Ошибка загрузки</string>
-    <string name="loading">Загрузка&#8230;</string>
+    <string name="app_name">XmlTask</string>
+    <string name="no_connection_message">Loading error!</string>
+    <string name="loading">Loading&#8230;</string>
+    <string name="get_xml">Get XML</string>
+    <string name="url_hint">http://</string>
+    <string name="id_col">Код</string>
+    <string name="name_col">Наим.товара</string>
+    <string name="activdate_col">Дата активации</string>
+    <string name="id_label">Код</string>
+    <string name="name_label">Наим.товара</string>
+    <string name="activdate_label">Дата активации</string>
+    <string name="segment_label">segment</string>
+    <string name="filiale_label">filiale</string>
+    <string name="aendkennz_label">Aendkennz</string>
+    <string name="aenddatum_label">Aenddatum</string>
+    <string name="hierarchie_label">Hierarchie</string>
+    <string name="verknuepfg_label">Verknuepfg</string>
+    <string name="sort_title">Сортировать по:</string>
+    <array name="sort_types">
+        <item>Коду</item>
+        <item>Наименованию</item>
+        <item>Дате активации</item>
+    </array>
 </resources>

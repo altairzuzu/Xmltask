@@ -21,7 +21,4 @@ public class ApiResponse {
         return products;
     }
 
-    public ApiResponse() {}
-
-
 }

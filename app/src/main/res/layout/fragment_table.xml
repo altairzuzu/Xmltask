@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:descendantFocusability="beforeDescendants"
+        android:focusableInTouchMode="true">
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/url"
+            android:hint="@string/url_hint"
+            android:text="@string/url_hint"
+            android:maxLines="1"
+            android:inputType="textUri"
+
+            android:layout_weight="3"/>
+
+        <Button
+            android:id="@+id/getXml"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/get_xml"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/id_col"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:textSize="@dimen/name"
+            android:text="@string/id_col"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/name_col"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="6"
+            android:textSize="@dimen/name"
+            android:text="@string/name_col"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/activdate_col"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:textSize="@dimen/name"
+            android:text="@string/activdate_col"
+            android:gravity="center"/>
+
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/list"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:divider="@color/list_divider"
+        android:dividerHeight="1dp" />
+
+</LinearLayout>
