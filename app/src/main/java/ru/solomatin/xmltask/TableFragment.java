@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -30,7 +31,7 @@ public class TableFragment extends Fragment {
     private ProductListAdapter adapter;
     @BindView(R.id.list) ListView prodListView;
     @BindView(R.id.url) EditText urlView;
-    private List<Product> productList;
+    private List<Product> productList = new ArrayList<>();
 
     @Override
     public void onAttach(Context context) {
@@ -56,7 +57,7 @@ public class TableFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         adapter = new ProductListAdapter(getActivity(),
-                listener.productList);
+                productList);
         prodListView.setAdapter(adapter);
         prodListView.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
@@ -69,13 +70,10 @@ public class TableFragment extends Fragment {
     }
 
     @OnClick(R.id.getXml)
-    public void getXml(View view) {
+    public void onGetXmlClick(View view) {
         urlView.clearFocus();
         String url = urlView.getText().toString();
-        listener.rxUrl = url;
-        listener.rxCallInWorks = true;
-        listener.presenter.loadRxData(url, false);
-
+        listener.getXML(url, false);
     }
 
     @Override

@@ -23,11 +23,11 @@ public class MainActivity extends AppCompatActivity implements
     private static final String EXTRA_RX = "EXTRA_RX";
     private static final String EXTRA_URL = "EXTRA_URL";
     private ProgressDialog pDialog;
-    public boolean rxCallInWorks = false;
-    public String rxUrl = "";
-    public Presenter presenter;
+    private boolean rxCallInWorks = false;
+    private String rxUrl = "";
+    private Presenter presenter;
     private TableFragment tableFragment;
-    public List<Product> productList = new ArrayList<>();
+    private List<Product> productList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements
     protected void onResume() {
         super.onResume();
         if(rxCallInWorks)
-            presenter.loadRxData(rxUrl, true);
+            getXML(rxUrl, true);
     }
 
     @Override
@@ -81,6 +81,11 @@ public class MainActivity extends AppCompatActivity implements
         outState.putString(EXTRA_URL, rxUrl);
     }
 
+    public void getXML(String url, boolean useCache) {
+        rxCallInWorks = true;
+        rxUrl = url;
+        presenter.loadRxData(url, useCache);
+    }
 
     protected void showRxResults(ApiResponse response) {
         List<Product> pl = response.getProducts();
@@ -92,11 +97,13 @@ public class MainActivity extends AppCompatActivity implements
         hidePDialog();
         rxCallInWorks = false;
         showSortDialog();
+        tableFragment.setProductList(productList);
         tableFragment.notifyRefresh();
     }
 
     protected void showRxInProcess(){
         productList.clear();
+        tableFragment.setProductList(productList);
         tableFragment.notifyRefresh();
         pDialog = new ProgressDialog(this);
         // Показываем прогресс-диалог
@@ -115,7 +122,6 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     public void sortProductList(int sortType){
-
         Comparator<Product> comparator;
         switch (sortType) {
             case 0:
@@ -133,7 +139,6 @@ public class MainActivity extends AppCompatActivity implements
                         return product.getName().compareToIgnoreCase(t1.getName());
                     }
                 };
-
                 break;
             default:
                 comparator = new Comparator<Product>() {
@@ -144,10 +149,9 @@ public class MainActivity extends AppCompatActivity implements
                 };
                 break;
         }
-
         Collections.sort(productList, comparator);
+        tableFragment.setProductList(productList);
         tableFragment.notifyRefresh();
-
     }
 
     void showSortDialog() {
@@ -176,11 +180,12 @@ public class MainActivity extends AppCompatActivity implements
         shouldDisplayHomeUp();
     }
 
-    @SuppressWarnings("")
     public void shouldDisplayHomeUp(){
         //Включаем кнопку Вверх только, если есть записи в стэке возврата
         boolean canback = getSupportFragmentManager().getBackStackEntryCount()>0;
-        getSupportActionBar().setDisplayHomeAsUpEnabled(canback);
+        if(getSupportActionBar() != null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(canback);
+        }
     }
 
     @Override
