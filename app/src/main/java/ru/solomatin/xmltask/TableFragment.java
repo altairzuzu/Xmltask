@@ -22,7 +22,7 @@ import butterknife.OnClick;
 import ru.solomatin.xmltask.Model.Product;
 
 /**
- * Фрагмент со списком Товаров/
+ * Фрагмент со списком Товаров
  */
 public class TableFragment extends Fragment {
 
