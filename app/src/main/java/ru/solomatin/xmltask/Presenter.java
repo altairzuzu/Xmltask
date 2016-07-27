@@ -20,7 +20,8 @@ public class Presenter {
 
     private MainActivity view;
     private Subscription subscription;
-    @Inject NetworkApi networkService;
+    @Inject
+    NetworkApi networkService;
     @Inject
     LruCache<String, Observable<?>> cacheObservables;
 

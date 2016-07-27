@@ -1,14 +1,11 @@
 package ru.solomatin.xmltask;
 
-import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
@@ -26,7 +23,6 @@ public class MainActivity extends AppCompatActivity implements
     private static final String EXTRA_RX = "EXTRA_RX";
     private static final String EXTRA_URL = "EXTRA_URL";
     private ProgressDialog pDialog;
-    //private Button rxCall;
     public boolean rxCallInWorks = false;
     public String rxUrl = "";
     public Presenter presenter;
@@ -168,7 +164,6 @@ public class MainActivity extends AppCompatActivity implements
 
     public void changeFragment(int position) {
         FragmentManager fm = getSupportFragmentManager();
-        //Fragment frag = fm.findFragmentById(R.id.content_frame);
         android.support.v4.app.FragmentTransaction fr = fm.beginTransaction();
         ProductFragment fragment = new ProductFragment();
         fragment.setProduct(productList.get(position));

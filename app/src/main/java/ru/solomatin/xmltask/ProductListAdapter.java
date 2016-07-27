@@ -15,7 +15,7 @@ import butterknife.ButterKnife;
 import ru.solomatin.xmltask.Model.Product;
 
 /**
- * Created by altair on 26.07.2016.
+ * Адаптер для списка товаров
  */
 public class ProductListAdapter extends BaseAdapter {
 

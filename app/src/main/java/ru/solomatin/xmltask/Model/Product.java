@@ -6,7 +6,7 @@ import org.simpleframework.xml.Path;
 import org.simpleframework.xml.Root;
 
 /**
- * Created by altair on 25.07.2016.
+ *  Товар
  */
 @Root(name = "E1WPW01", strict = false)
 public class Product {

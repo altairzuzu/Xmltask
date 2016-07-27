@@ -1,6 +1,5 @@
 package ru.solomatin.xmltask.Model;
 
-import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Path;
 import org.simpleframework.xml.Root;

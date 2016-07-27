@@ -6,16 +6,14 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 
-
 /**
- * Created by altair on 26.07.2016.
+ * Диалог для выбора типа сортировки
  */
 public class SortDialog extends DialogFragment {
 
     @Override
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
-//        setCancelable(true);
         int style = DialogFragment.STYLE_NORMAL, theme = 0;
         setStyle(style, theme);
     }

@@ -6,10 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
-
-import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -17,7 +14,7 @@ import butterknife.Unbinder;
 import ru.solomatin.xmltask.Model.Product;
 
 /**
- * Created by altair on 26.07.2016.
+ * Фрагмент с информацией о Товаре
  */
 public class ProductFragment extends Fragment {
 
@@ -73,12 +70,6 @@ public class ProductFragment extends Fragment {
         aenddatum.setText(product.getAenddatum());
         hierarchie.setText(product.getHierarchie());
         verknuepfg.setText(product.getVerknuepfg());
-
-//        if (person.getAge() != 0) {
-//            age.setText(String.valueOf(person.getAge()));
-//        } else {
-//            age.setText("-");
-//        }
 
         return view;
     }

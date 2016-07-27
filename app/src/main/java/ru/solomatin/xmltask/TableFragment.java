@@ -18,12 +18,11 @@ import butterknife.OnClick;
 import ru.solomatin.xmltask.Model.Product;
 
 /**
- * Created by altair on 26.07.2016.
+ * Фрагмент со списком Товаров
  */
 public class TableFragment extends Fragment {
 
     public static final String TAG = "TableFragment";
-    //private static final String URL = "http://192.168.1.33:3000/1.xml";
     private MainActivity listener;
     private ProductListAdapter adapter;
     @BindView(R.id.list) ListView prodListView;
@@ -68,7 +67,6 @@ public class TableFragment extends Fragment {
 
     @OnClick(R.id.getXml)
     public void getXml(View view) {
-        //listener.presenter.loadRxData("http://192.168.1.33:3000/1.xml", false);
         urlView.clearFocus();
         String url = urlView.getText().toString();
         listener.rxUrl = url;
