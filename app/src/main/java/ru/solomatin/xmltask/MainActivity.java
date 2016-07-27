@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity implements
     public boolean rxCallInWorks = false;
     public String rxUrl = "";
     public Presenter presenter;
-    public TableFragment tableFragment;
+    private TableFragment tableFragment;
     public List<Product> productList = new ArrayList<>();
 
     @Override
