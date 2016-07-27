@@ -31,7 +31,7 @@ public class TableFragment extends Fragment {
     private ProductListAdapter adapter;
     @BindView(R.id.list) ListView prodListView;
     @BindView(R.id.url) EditText urlView;
-    private List<Product> productList = new ArrayList<>();
+    private List<Product> productList;
 
     @Override
     public void onAttach(Context context) {

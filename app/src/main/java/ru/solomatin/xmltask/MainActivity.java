@@ -48,11 +48,11 @@ public class MainActivity extends AppCompatActivity implements
         tableFragment =
                 (TableFragment) fm.findFragmentByTag(TableFragment.TAG);
         if (tableFragment == null) {
-            // Создаем фрагмент с таблицей
             tableFragment = new TableFragment();
             android.support.v4.app.FragmentTransaction fr = fm.beginTransaction();
             fr.replace(R.id.content_frame, tableFragment, TableFragment.TAG);
             fr.commit();
+            tableFragment.setProductList(productList);
         } else {
             // Если фрагмент с таблицей уже есть в памяти - восстанавливаем список Товаров
             productList = tableFragment.getProductList();
@@ -71,7 +71,6 @@ public class MainActivity extends AppCompatActivity implements
     protected void onPause() {
         super.onPause();
         presenter.rxUnSubscribe();
-        tableFragment.setProductList(productList);
     }
 
     @Override
@@ -97,16 +96,13 @@ public class MainActivity extends AppCompatActivity implements
         hidePDialog();
         rxCallInWorks = false;
         showSortDialog();
-        tableFragment.setProductList(productList);
         tableFragment.notifyRefresh();
     }
 
     protected void showRxInProcess(){
         productList.clear();
-        tableFragment.setProductList(productList);
         tableFragment.notifyRefresh();
         pDialog = new ProgressDialog(this);
-        // Показываем прогресс-диалог
         pDialog.setMessage(getResources().getString(R.string.loading));
         pDialog.setCanceledOnTouchOutside(false);
         pDialog.show();
@@ -150,7 +146,6 @@ public class MainActivity extends AppCompatActivity implements
                 break;
         }
         Collections.sort(productList, comparator);
-        tableFragment.setProductList(productList);
         tableFragment.notifyRefresh();
     }
 
